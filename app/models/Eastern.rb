@@ -1,0 +1,2 @@
+class Eastern < ApplicationRecord
+end
