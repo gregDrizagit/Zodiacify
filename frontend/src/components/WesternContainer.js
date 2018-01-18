@@ -10,6 +10,8 @@ class WesternContainer extends React.Component
     }
   }
 
+  //logic for this horoscope 
+
   render()
   {
     return(

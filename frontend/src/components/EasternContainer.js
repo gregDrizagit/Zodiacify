@@ -8,6 +8,8 @@ class EasternContainer extends React.Component{
     }
   }
 
+  //logic for this horoscope
+
   render()
   {
     return(
