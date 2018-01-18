@@ -13,6 +13,7 @@
 ActiveRecord::Schema.define(version: 20180117205842) do
 
   create_table "compatibilities", force: :cascade do |t|
+    
   end
 
   create_table "easterns", force: :cascade do |t|

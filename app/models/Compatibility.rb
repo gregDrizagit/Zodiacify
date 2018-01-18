@@ -1,4 +1,4 @@
 class Compatibility < ApplicationRecord
-  belongs_to :ChineseHoroscope
-  belongs_to :PartnerChineseHoroscope, :class_name => "Compatibility" 
+  belongs_to :eastern
+  belongs_to :eastern_partner, :class_name => "eastern"
 end
