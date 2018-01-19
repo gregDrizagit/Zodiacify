@@ -1,5 +1,6 @@
 import React from 'react'
 import Adapter from '../adapter';
+import MyPage from './MyPage'
 
 class UserContainer extends React.Component
 {
@@ -8,17 +9,17 @@ class UserContainer extends React.Component
     super()
     this.state = {
       users: [],
-      fullName: "",
-      birthdate: null
+      currentUser:""
     }
 
   }
   componentDidMount()
   {
-    this.getUsers()
-    .then(users => this.setState({
-      users: users
-    }))
+    this.setState({
+      users: this.props.users,
+      currentUser: this.props.currentUser
+    }, () => this.calcuateChineseSign())
+
   }
 
 
@@ -27,6 +28,12 @@ class UserContainer extends React.Component
     return Adapter.getUsers()
   }
 
+  // saveUser = (e) => // move this too?
+  // {
+  //   debugger
+  //   Adapter.postUser(props.fullName, props.birthdate)
+  //   .then(() => )
+  // }
 
   calculateWesternSign = () =>
   {
@@ -46,12 +53,35 @@ class UserContainer extends React.Component
       aquarius: [new Date("1900-1-21"), new Date("1900-2-19")],
       pisces: [new Date("1900-2-20"), new Date("1900-3-20")]
     }
+  //   Object.keys(zodiac).find(sign =>
+  //   elli.birthdate >= zodiac[sign][0] && elli.birthdate <= zodiac[sign][1]
+  // )
   }
+
+calcuateChineseSign = () =>
+{
+ const jiazi = 1924;
+ const years = {}
+ const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
+ let animalsIndex = 0
+ for(let i = 1924; i < 2024; i++)
+ {
+   years[i] = signs[animalsIndex]
+ animalsIndex === signs.length-1 ? animalsIndex = 0 : animalsIndex++
+
+
+ }
+ debugger
+ return years
+}
+
+
   render()
   { console.log('in render', this.state.users)
     return(
       <div>
-        {<h1>Welcome {this.props.name} - {this.props.date.toString()}</h1>}
+        {<h1>Welcome {this.state.currentUser.full_name}</h1>}
+        <MyPage />
       </div>
     )
   }

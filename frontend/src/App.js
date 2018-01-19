@@ -2,44 +2,44 @@ import React, { Component } from 'react';
 import WesternContainer from './components/WesternContainer'
 import EasternContainer from './components/EasternContainer'
 import Login from './components/Login'
-import SignupForm from './components/SignupForm'
 import UserContainer from './components/UserContainer'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
 import Adapter from './adapter'
 
-// <Route exact path="/login" component={Login} />
+//TODO: 1. open up login form, put in name, find name in list of names in state 2. then input as prop into UserContainer -> then send that info to a MyPage container and render My info.
 
 class App extends Component {
   constructor()
   {
     super()
     this.state = {
-      // users: [],
-      fullName:"",
-      birthdate: null
+      users: [],
+      currentUser: ""
     }
   }
-  componentDidMount() {
-
+  componentDidMount()
+  {
+    Adapter.getUsers()
+    .then(users => this.setState({
+      users: users
+    }))
   }
 
   loginInput = (e) =>
   {
     e.preventDefault()
+    const user = this.state.users.find(user => user.full_name.toLowerCase().includes(e.target[0].value.toLowerCase()))
+    if (user) {
+      this.setState({
+        currentUser: user
+      }, this.props.history.push("user"))
+    } else {
+      alert("Not a valid user!")
+    }
+
   }
 
-  signUpInput = (e) => {
-    e.preventDefault()
-    this.setState({fullName: e.target.children[0].value, birthdate: new Date(e.target.children[1].value)}, this.saveUser(e) )
 
-  } // perhaps move back to usercontainer?
-
-  saveUser = (e) => // move this too?
-  {
-    debugger
-    Adapter.postUser(e.target.children[0].value, e.target.children[1].value)
-    .then(() => this.props.history.push("user"))
-  }
 
   handleDateInput = (e) =>
   {
@@ -50,8 +50,8 @@ class App extends Component {
     return (
       <div>
           <div>
-            <Route exact path="/" render={() => <Login loginInput={this.loginInput} signUpInput={this.signUpInput}/>}/>
-            <Route exact path="/user" render={() => <UserContainer name={this.state.fullName} date={this.state.birthdate}/>} />
+            <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
+            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}/>} />
             // <Route exact path="/western" render={WesternContainer} />
 
           </div>
