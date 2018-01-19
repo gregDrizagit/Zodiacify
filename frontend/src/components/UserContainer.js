@@ -7,6 +7,7 @@ class UserContainer extends React.Component
   {
     super()
     this.state = {
+      users: [],
       fullName: "",
       birthdate: null
     }
@@ -14,14 +15,13 @@ class UserContainer extends React.Component
   }
   componentDidMount()
   {
-    this.getUsers().then(console.log)
+    this.getUsers()
+    .then(users => this.setState({
+      users: users
+    }))
   }
 
-  saveUser = () =>
-  {
-    Adapter.postUser(this.props.name, this.props.birthdate)
 
-  }
   getUsers = () =>
   {
     return Adapter.getUsers()
@@ -30,6 +30,7 @@ class UserContainer extends React.Component
 
   calculateWesternSign = () =>
   {
+    // assign all the user birth years to 1900
     let zodiac =
     {
       aries: [new Date("1900-3-21"), new Date('1900-4-20')],
@@ -47,7 +48,7 @@ class UserContainer extends React.Component
     }
   }
   render()
-  {
+  { console.log('in render', this.state.users)
     return(
       <div>
         {<h1>Welcome {this.props.name} - {this.props.date.toString()}</h1>}
