@@ -1,5 +1,5 @@
 import React from 'react'
-// import getUsers from './adapter';
+import Adapter from '../adapter';
 
 class UserContainer extends React.Component
 {
@@ -14,9 +14,19 @@ class UserContainer extends React.Component
   }
   componentDidMount()
   {
-    this.setState({fullName: this.props.name, birthdate: this.props.date})
+    this.getUsers().then(console.log)
+  }
+
+  saveUser = () =>
+  {
+    Adapter.postUser(this.props.name, this.props.birthdate)
 
   }
+  getUsers = () =>
+  {
+    return Adapter.getUsers()
+  }
+
 
   calculateWesternSign = () =>
   {
@@ -38,7 +48,6 @@ class UserContainer extends React.Component
   }
   render()
   {
-    console.log(this.state)
     return(
       <div>
         {<h1>Welcome {this.props.name} - {this.props.date.toString()}</h1>}

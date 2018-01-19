@@ -1,17 +1,21 @@
-
-function getUsers()
+class Adapter
 {
-  fetch('http://localhost:3003/user').then(resp => resp.json())
+  static getUsers()
+  {
+    return fetch('http://localhost:3003/users').then(resp => resp.json())
+
+  }
+  static postUser(name, birthdate)
+  {
+    return fetch('http://localhost:3003/users',{
+      method: 'post',
+      headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({name: name, birthdate: birthdate})
+    })
+  }
 
 }
-function postUser(user)
-{
-  return fetch('http://localhost:3003/user',{
-    method: 'post',
-    header:{
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({fullName: user})
-  })
-}
-export default getUsers;
+export default Adapter;

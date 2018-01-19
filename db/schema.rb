@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180118194727) do
+ActiveRecord::Schema.define(version: 20180118211844) do
 
   create_table "compatibilities", force: :cascade do |t|
     t.integer "eastern_id"
@@ -39,6 +39,8 @@ ActiveRecord::Schema.define(version: 20180118194727) do
     t.string "quality"
     t.string "planet"
     t.integer "user_id"
+    t.string "img_url"
+    t.string "description"
   end
 
 end

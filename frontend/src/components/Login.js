@@ -5,7 +5,7 @@ const Login = (props) =>
 {
   return(
     <div>
-      <form onSubmit={props.name}>
+      <form onSubmit={props.loginInput}>
         <input type="text" placeholder="Full Name" />
         <input id="date" type="date" />
         <button type="submit">Join</button>

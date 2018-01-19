@@ -13,19 +13,19 @@ class App extends Component {
   {
     super()
     this.state = {
-      users: [],
+      // users: [],
       fullName:"",
       birthdate: null
     }
   }
-  componentDidMount()
-  {
+  componentDidMount() {
+
   }
-  handleNameInput = (e) =>
+
+  loginInput = (e) =>
   {
     e.preventDefault()
     this.setState({fullName: e.target.children[0].value, birthdate: new Date(e.target.children[1].value)}, this.props.history.push("user"));
-
   }
   handleDateInput = (e) =>
   {
@@ -35,7 +35,7 @@ class App extends Component {
     return (
       <div>
           <div>
-            <Route exact path="/" render={() => <Login name={this.handleNameInput} date={this.handleDateInput}/>}/>
+            <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
             <Route exact path="/user" render={() => <UserContainer name={this.state.fullName} date={this.state.birthdate}/>} />
             // <Route exact path="/western" render={WesternContainer} />
 

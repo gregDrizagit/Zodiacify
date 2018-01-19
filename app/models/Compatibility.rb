@@ -1,5 +1,8 @@
 class Compatibility < ApplicationRecord
-  belongs_to :eastern
-  belongs_to :eastern_partner, :class_name => "Eastern"
+  belongs_to :eastern, optional: true
+  belongs_to :eastern_partner, :class_name => "Eastern", optional: true
+  # 
+  # after_create :create_inverse, unless: :has_inverse?
+  # after_destroy :destroy_inverse, if: :has_inverse?
 
 end
