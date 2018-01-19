@@ -1,21 +1,21 @@
 class EasternsController < ApplicationController
   def index
-    @chinesehoroscope = ChineseHoroscope.all
-    render json: @chinesehoroscope
+    @eastern = Eastern.all
+    render json: @eastern
   end
   def create
-    @chinesehoroscope = ChineseHoroscope.create
-    render json: @chinesehoroscope
+    @eastern = Eastern.create
+    render json: @eastern
   end
 
   def show
-    @chinesehoroscope = ChineseHoroscope.find(params[:id])
-    render json: @chinesehoroscope
+    @eastern = Eastern.find(params[:id])
+    render json: @eastern
   end
 
 
   private
   def chinese_params
-    params.require(:chinesehoroscope).permit(:name, :description, :lucky_number, :lucky_color, :img_url)
+    params.require(:eastern).permit(:name, :description, :lucky_number, :lucky_color, :img_url)
   end
 end

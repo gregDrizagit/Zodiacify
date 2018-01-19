@@ -18,9 +18,16 @@ class App extends Component {
       birthdate: null
     }
   }
-  componentDidMount()
-  {
+  componentDidMount() {
+    fetch("http://localhost:3001/users")
+    .then(res => res.json())
+    .then(json => this.setState({
+      fullName: json.fullName,
+      birthdate: json.birthdate
+    }, () => console.log(this.state))
+    )
   }
+  
   handleNameInput = (e) =>
   {
     e.preventDefault()

@@ -1,21 +1,21 @@
 class WesternsController < ApplicationController
 
   def index
-    @westernhoroscopes = WesterHoroscope.all
-    render json: @westernhoroscopes
+    @westerns = Western.all
+    render json: @westerns
   end
   def create
-    @westernhoroscope = WesterHoroscope.create
-    render json: @westernhoroscope
+    @western = Western.create
+    render json: @western
   end
 
   def show
-    @westernhoroscope = WesterHoroscope.find(params[:id])
+    @western = Western.find(params[:id])
   end
 
 
   private
   def western_params
-    params.require(:westernhoroscope).permit(:sign, :element, :quality, :planet)
+    params.require(:western).permit(:sign, :element, :quality, :planet)
   end
 end

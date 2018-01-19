@@ -12,11 +12,16 @@ class UserContainer extends React.Component
     }
 
   }
-  componentDidMount()
-  {
-    this.setState({fullName: this.props.name, birthdate: this.props.date})
+  // componentDidMount() {
+  //   fetch("http://localhost:3001/users")
+  //   .then(res => res.json())
+  //   .then(json => this.setState({
+  //     fullName: json.fullName,
+  //     birthdate: json.birthdate
+  //   }, () => console.log(this.state))
+  //   )
+  // }
 
-  }
   render()
   {
 
