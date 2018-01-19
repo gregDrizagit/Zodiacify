@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import getUsers from './adapter';
 import WesternContainer from './components/WesternContainer'
 import EasternContainer from './components/EasternContainer'
 import Login from './components/Login'
 import SignupForm from './components/SignupForm'
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import UserContainer from './components/UserContainer'
+import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+
 // <Route exact path="/login" component={Login} />
 
 class App extends Component {
@@ -12,28 +13,39 @@ class App extends Component {
   {
     super()
     this.state = {
-      users: []
+      users: [],
+      fullName:"",
+      birthdate: null
     }
   }
   componentDidMount()
   {
-    const users = getUsers()
-    this.setState({users: users})
+  }
+  handleNameInput = (e) =>
+  {
+    e.preventDefault()
+    this.setState({fullName: e.target.children[0].value, birthdate: new Date(e.target.children[1].value)}, this.props.history.push("user"));
+
+  }
+  handleDateInput = (e) =>
+  {
+    this.setState({birthdate: new Date(e.target.value)});
   }
   render() {
     return (
       <div>
-        <Router>
           <div>
-            <Route exact path="/" render={() => <h1>Welcome to Zodiacify</h1> }/>
-            <Route exact path="/eastern" render={() => <EasternContainer />} />
-            <Route exact path="/western" component={WesternContainer} />
+            <Route exact path="/" render={() => <Login name={this.handleNameInput} date={this.handleDateInput}/>}/>
+            <Route exact path="/user" render={() => <UserContainer name={this.state.fullName} date={this.state.birthdate}/>} />
+            // <Route exact path="/western" render={WesternContainer} />
+
           </div>
-        </Router>
       </div>
 
     )
   }
 }
 
-export default App;
+// name={this.state.fullName} birthdate={this.state.birthdate}
+
+export default withRouter(App);
