@@ -46,7 +46,6 @@ class App extends Component {
     this.setState({birthdate: new Date(e.target.value)});
   }
   render() {
-    console.log("app render", this.state);
     return (
       <div>
           <div>

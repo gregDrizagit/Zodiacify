@@ -4,12 +4,15 @@ import MyPage from './MyPage'
 
 class UserContainer extends React.Component
 {
+
   constructor()
   {
     super()
     this.state = {
       users: [],
-      currentUser:""
+      currentUser:"",
+      easternSign:"",
+      westernSign:""
     }
 
   }
@@ -18,26 +21,42 @@ class UserContainer extends React.Component
     this.setState({
       users: this.props.users,
       currentUser: this.props.currentUser
-    }, () => this.calcuateChineseSign())
+    },
+    () => this.setState({easternSign: this.calcuateChineseSign(),
+          westernSign: this.calculateWesternSign()})
 
+    )
   }
-
+  componentDidUpdate()
+  {
+    if(this.state.easternSign !== "" && this.state.westernSign !== "")
+    {
+      this.updateUserSigns()
+    }
+  }
 
   getUsers = () =>
   {
     return Adapter.getUsers()
   }
+  getSignDatabaseId = () =>
+  {
+    const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
+    return signs.indexOf(this.state.easternSign) + 1
+  }
 
-  // saveUser = (e) => // move this too?
-  // {
-  //   debugger
-  //   Adapter.postUser(props.fullName, props.birthdate)
-  //   .then(() => )
-  // }
+  updateUserSigns = () => // move this too?
+  {
+    let easternId = this.getSignDatabaseId()
+    Adapter.patchSignsToUser(this.state.currentUser, easternId, 5)
+
+  }
 
   calculateWesternSign = () =>
   {
     // assign all the user birth years to 1900
+    const birthday = new Date(this.state.currentUser.birthdate)
+    birthday.setFullYear(1900)
     let zodiac =
     {
       aries: [new Date("1900-3-21"), new Date('1900-4-20')],
@@ -53,35 +72,34 @@ class UserContainer extends React.Component
       aquarius: [new Date("1900-1-21"), new Date("1900-2-19")],
       pisces: [new Date("1900-2-20"), new Date("1900-3-20")]
     }
-  //   Object.keys(zodiac).find(sign =>
-  //   elli.birthdate >= zodiac[sign][0] && elli.birthdate <= zodiac[sign][1]
-  // )
+     const userSign = Object.keys(zodiac).find(sign =>
+       birthday >= zodiac[sign][0] && birthday <= zodiac[sign][1])
+     return userSign
   }
 
 calcuateChineseSign = () =>
 {
- const jiazi = 1924;
- const years = {}
- const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
- let animalsIndex = 0
- for(let i = 1924; i < 2024; i++)
- {
+
+  const birthday = new Date(this.state.currentUser.birthdate).getUTCFullYear()
+  const jiazi = 1924;
+  const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
+
+  const years = {}
+  let animalsIndex = 0
+  for(let i = jiazi; i < 2024; i++)
+  {
    years[i] = signs[animalsIndex]
- animalsIndex === signs.length-1 ? animalsIndex = 0 : animalsIndex++
-
-
- }
- debugger
- return years
+   animalsIndex === signs.length-1 ? animalsIndex = 0 : animalsIndex++
+  }
+  return years[birthday]
 }
 
-
   render()
-  { console.log('in render', this.state.users)
+  {
     return(
       <div>
         {<h1>Welcome {this.state.currentUser.full_name}</h1>}
-        <MyPage />
+        <MyPage users={this.state.users} />
       </div>
     )
   }
