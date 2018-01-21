@@ -1,2 +1,9 @@
 import React from 'react'
-export default ChineseList
+
+const EasternList = (props) =>
+{
+  return(
+    <p>{this.props}</p>
+  )
+}
+export default EasternList

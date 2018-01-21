@@ -12,8 +12,9 @@ class WesternContainer extends React.Component
 
   render()
   {
+    console.log("western container", this.props.western)
     return(
-      <h1>Western Container</h1>
+      <p>Western Container</p>
     )
   }
 }
