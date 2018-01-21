@@ -5,6 +5,10 @@ class Adapter
     return fetch('http://localhost:3001/users').then(resp => resp.json())
 
   }
+  static getEasternPartners(easternId)
+  {
+    return fetch(`http://localhost:3001/easterns/${easternId}`).then(resp => resp.json())
+  }
   static postUser(name, birthdate)
   {
     return fetch('http://localhost:3001/users',{

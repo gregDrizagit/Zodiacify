@@ -12,7 +12,7 @@ class UserContainer extends React.Component
       users: [],
       currentUser:"",
       easternSign:"",
-      westernSign:""
+      westernSign:{}
     }
 
   }
@@ -47,9 +47,10 @@ class UserContainer extends React.Component
 
   updateUserSigns = () => // move this too?
   {
+    //We're doing something a little bit tricky here to associate our user with our eastern and western signs.
+    //We're using look
     let easternId = this.getSignDatabaseId()
-    Adapter.patchSignsToUser(this.state.currentUser, easternId, 5)
-
+    Adapter.patchSignsToUser(this.state.currentUser, easternId, this.state.westernSign.databaseId)
   }
 
   calculateWesternSign = () =>
@@ -59,22 +60,22 @@ class UserContainer extends React.Component
     birthday.setFullYear(1900)
     let zodiac =
     {
-      aries: [new Date("1900-3-21"), new Date('1900-4-20')],
-      taurus: [new Date("1900-4-21"), new Date("1900-5-20")],
-      gemini: [new Date("1900-5-21"), new Date("1900-6-20")],
-      cancer: [new Date("1900-6-21"), new Date("1900-7-21")],
-      leo: [new Date("1900-7-22"), new Date("1900-8-22")],
-      virgo: [new Date("1900-8-23"), new Date("1900-9-21")],
-      libra: [new Date("1900-9-22"), new Date("1900-10-21")],
-      scorpio: [new Date("1900-10-22"), new Date("1900-11-21")],
-      sagittarius: [new Date("1900-11-22"), new Date("1900-12-21")],
-      capricorn: [new Date("1900-12-22"), new Date("1900-1-20")],
-      aquarius: [new Date("1900-1-21"), new Date("1900-2-19")],
-      pisces: [new Date("1900-2-20"), new Date("1900-3-20")]
+      aries: [new Date("1900-3-21"), new Date('1900-4-20'), 1],
+      taurus: [new Date("1900-4-21"), new Date("1900-5-20"), 2],
+      gemini: [new Date("1900-5-21"), new Date("1900-6-20"), 3],
+      cancer: [new Date("1900-6-21"), new Date("1900-7-21"), 4],
+      leo: [new Date("1900-7-22"), new Date("1900-8-22"), 5],
+      virgo: [new Date("1900-8-23"), new Date("1900-9-21"), 6],
+      libra: [new Date("1900-9-22"), new Date("1900-10-21"), 7],
+      scorpio: [new Date("1900-10-22"), new Date("1900-11-21"), 8],
+      sagittarius: [new Date("1900-11-22"), new Date("1900-12-21"), 9],
+      capricorn: [new Date("1900-12-22"), new Date("1900-1-20"), 10],
+      aquarius: [new Date("1900-1-21"), new Date("1900-2-19"), 11],
+      pisces: [new Date("1900-2-20"), new Date("1900-3-20"), 12]
     }
      const userSign = Object.keys(zodiac).find(sign =>
        birthday >= zodiac[sign][0] && birthday <= zodiac[sign][1])
-     return userSign
+     return {sign: userSign, databaseId: zodiac[userSign][2]}
   }
 
 calcuateChineseSign = () =>
@@ -98,7 +99,6 @@ calcuateChineseSign = () =>
   {
     return(
       <div>
-        {<h1>Welcome {this.state.currentUser.full_name}</h1>}
         <MyPage users={this.state.users} />
       </div>
     )
