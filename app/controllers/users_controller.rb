@@ -9,10 +9,10 @@ class UsersController < ApplicationController
   end
 
   def update
+
     @user = User.find(params[:id])
     @user.eastern = Eastern.all.find(params[:eastern])
     @user.western = Western.all.find(params[:western])
-
     render json: @user
   end
 

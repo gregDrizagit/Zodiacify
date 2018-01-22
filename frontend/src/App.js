@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import WesternContainer from './components/WesternContainer'
-import EasternContainer from './components/EasternContainer'
 import Login from './components/Login'
 import UserContainer from './components/UserContainer'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
@@ -14,16 +12,11 @@ class App extends Component {
     super()
     this.state = {
       users: [],
-      allEast: [],
-      currentUser: ""
+      currentUser: null
     }
   }
   componentDidMount()
   {
-    Adapter.fetchEastSigns()
-    .then(signs => this.setState({
-      allEast: signs
-    }))
     Adapter.getUsers()
     .then(users => this.setState({
       users: users
@@ -35,18 +28,16 @@ class App extends Component {
     e.preventDefault()
     const user = this.state.users.find(user => user.full_name.toLowerCase().includes(e.target[0].value.toLowerCase()))
     if (user) {
-
       this.setState({
         currentUser: user
       }, this.props.history.push("user"))
     } else {
-
       alert("Not a valid user!")
     }
 
+    console.log("log in")
+
   }
-
-
 
   handleDateInput = (e) =>
   {
@@ -57,9 +48,7 @@ class App extends Component {
       <div>
           <div>
             <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
-            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}
-              allEast={this.state.allEast}/>} />
-
+            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}/>} />
           </div>
       </div>
 

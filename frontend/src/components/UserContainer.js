@@ -6,46 +6,29 @@ import MyPage from './MyPage'
 
 class UserContainer extends React.Component
 {
-  constructor()
+  constructor(props)
   {
-    super()
+    super(props)
+    console.log("user container mounting")
     this.state = {
-      users: [],
-      allEast: [],
-      currentUser:"",
-      easternSign:"",
-      westernSign:{}
+      users: this.props.users,
+      currentUser: this.props.currentUser,
+      easternSign: "",
+      westernSign: ""
     }
   }
 
   componentDidMount()
   {
-
-    this.setState({
-      users: this.props.users,
-      currentUser: this.props.currentUser,
-      allEast: this.props.allEast
-    },
-    this.setSigns()
-    )
-
-  }
-
-  setSigns = () => {
-
-    this.setState({
-      easternSign: this.calcuateChineseSign(),
-      westernSign: this.calculateWesternSign()
-    })
-  }
-
-  componentDidUpdate()
-  {
-    if(this.state.easternSign !== "" && this.state.westernSign !== "")
+    if(this.state.currentUser.eastern && this.state.currentUser.western)
     {
+    }else{
       this.updateUserSigns()
     }
+
+
   }
+
 
   getUsers = () =>
   {
@@ -55,15 +38,18 @@ class UserContainer extends React.Component
   getSignDatabaseId = () =>
   {
     const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
-    return signs.indexOf(this.state.easternSign) + 1
+    return signs.indexOf(this.calculateChineseSign()) + 1
   }
 
   updateUserSigns = () => // move this too?
   {
     //We're doing something a little bit tricky here to associate our user with our eastern and western signs.
     //We're using look
+
     let easternId = this.getSignDatabaseId()
-    Adapter.patchSignsToUser(this.state.currentUser, easternId, this.state.westernSign.databaseId)
+    let westernId = this.calculateWesternSign()
+    console.log("patch")
+    Adapter.patchSignsToUser(this.state.currentUser, easternId, westernId.databaseId).then(user => this.setState({currentUser: user}))
   }
 
   calculateWesternSign = () =>
@@ -91,7 +77,7 @@ class UserContainer extends React.Component
      return {sign: userSign, databaseId: zodiac[userSign][2]}
   }
 
-calcuateChineseSign = () =>
+calculateChineseSign = () =>
 {
   const birthday = new Date(this.props.currentUser.birthdate).getUTCFullYear()
   const jiazi = 1924;
@@ -109,14 +95,13 @@ calcuateChineseSign = () =>
 
   render(){
 
-    console.log('PARENT in user render', this.state);
     return(
       <div>
-        <MyPage
-          users={this.state.users} currentUser={this.state.currentUser}
-          allEast={this.state.allEast}
-          eastern={this.state.easternSign}
-          western={this.state.westernSign} />
+        {this.state.users && this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western ?
+          <MyPage users={this.state.users} currentUser={this.state.currentUser} />
+          :
+          <h1>Loading</h1>
+        }
       </div>
     )
   }

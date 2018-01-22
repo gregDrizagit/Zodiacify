@@ -5,8 +5,14 @@ class MyPage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      compatability: ""
+      currentUser: this.props.currentUser,
+      users: this.props.users
     }
+  }
+
+  componentDidMount()
+  {
+    // this.setState({currentUser: this.props.currentUser})
   }
 
   render(){
@@ -20,10 +26,10 @@ class MyPage extends React.Component {
               <label>My Chinese Zodiac Info:</label>
               <EasternContainer
                 users={this.props.users}
-                currentUser={this.props.currentUser}
-                allEast={this.props.allEast} eastern={this.props.eastern} />
+                currentUser={this.state.currentUser}
+              />
               <label>My Western Astrology Info:</label>
-              <WesternContainer western={this.props.western} />
+              <WesternContainer western={this.props.currentUser} />
           </div>
         }
       </div>

@@ -9,44 +9,59 @@ class EasternContainer extends React.Component{
   {
     super(props)
     this.state = {
-      allSigns: props.allEast,
-      partners:[],
-      clicked: false
+      currentUser: this.props.currentUser,
+      users: this.props.users
     }
   }
 
-  eastSign = () => {
-    const sign = this.state.allSigns.find(sign => sign.sign === this.props.eastern
-    )
-    return sign
+  // componentDidMount()
+  // {
+  //   this.setState({currentUser: this.props.currentUser, users: this.props.users })
+  // }
 
-  }
+  showCompatibleUsers = (currentUser, users) =>
+  {
+    //if user.eastern.sign is contained in currentUser.eastern_partners
+      //collect that users
 
-  handleClick = () => {
-    this.setState({
-      clicked: !this.state.clicked
-    })
+    const compatibleUsers = []
+    // currentUser.eastern.eastern_partners.forEach(partner => {
+    //   users.forEach(user => {
+    //     console.log("user sign", user)
+    //     console.log("partner sign", partner)
+    //
+    //     if(user.eastern.sign === partner.sign)
+    //     {
+    //       compatibleUsers.push(user)
+    //     }
+    //   })
+    // })
+    console.log(currentUser)
+
+    return compatibleUsers
   }
 
   render() {
-    let description = ""
-    if (this.state.clicked) {
-      description = <div>
-        <img src={this.eastSign().img_url} />
-    <p>{this.eastSign().description}</p> -
-    <p>Lucky Colors: {this.eastSign().lucky_color} </p> -
-    <p>Lucky Numbers: {this.eastSign().lucky_number} </p>
-    <EasternList
-      users={this.props.users} partners={this.eastSign().eastern_partners} />
 
-    </div>
-    }
-    console.log("GRANDCHILD eastern partners state", this.props.users)
+    console.log("GRANDCHILD eastern partners state", this.state.currentUser)
+
     return(
       <div>
-        <h2 onClick={this.handleClick}>{this.eastSign().sign}</h2>
-          {description}
+        <h1>Eastern Container </h1>
+        {
+          this.state.currentUser && this.state.users ?
+          <div>
+            {this.showCompatibleUsers(this.state.currentUser, this.state.users)}
 
+            <h1>{this.state.currentUser.eastern.sign}</h1>
+            <p>{this.state.currentUser.eastern.lucky_color}</p> -
+            <p>{this.state.currentUser.eastern.lucky_number}</p> -
+            <p>{this.state.currentUser.eastern.description}</p> -
+
+          </div>
+            :
+            <p>Loading</p>
+        }
       </div>
     )
   }

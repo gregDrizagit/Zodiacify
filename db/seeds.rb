@@ -7,8 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 elli = User.create(full_name: "Elli Shim", birthdate: '12/12/1990')
-joyce = User.create(full_name: "Joyce Park", birthdate: '5/10/1991')
+joyce = User.create(full_name: "Joyce Park", birthdate: '12/15/1991')
 greg = User.create(full_name: "Greg Driza", birthdate: "22/10/1994")
+jimmy = User.create(full_name: "Jimmy", birthdate: "22/10/1994")
 
 
 # Western Horoscope
