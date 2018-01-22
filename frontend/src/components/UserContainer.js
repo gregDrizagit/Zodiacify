@@ -108,7 +108,7 @@ calcuateChineseSign = () =>
 }
 
   render()
-  {console.log('in user render', this.state);
+  {console.log('in user render', this.state.currentUser.eastern.eastern_partners);
     return(
       <div>
         <MyPage
