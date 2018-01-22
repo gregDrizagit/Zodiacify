@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import NavBar from './components/NavBar'
 import Login from './components/Login'
 import UserContainer from './components/UserContainer'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
