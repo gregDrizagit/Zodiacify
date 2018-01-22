@@ -33,7 +33,7 @@ class WesternContainer extends React.Component
     // t.integer "user_id"
     // t.string "img_url"
     // t.string "description"
-    console.log(this.props.western)
+
     return(
       <div>
         <h1 onClick={this.handleClick}>Sign: {this.props.western.sign}</h1>

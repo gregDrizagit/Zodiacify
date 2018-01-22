@@ -107,8 +107,9 @@ calcuateChineseSign = () =>
   return years[birthday]
 }
 
-  render()
-  {console.log('in user render', this.state.currentUser.eastern.eastern_partners);
+  render(){
+
+    console.log('PARENT in user render', this.state);
     return(
       <div>
         <MyPage
