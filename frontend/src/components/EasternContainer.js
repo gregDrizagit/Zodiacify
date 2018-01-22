@@ -1,7 +1,7 @@
 import React from 'react'
 import EasternList from './EasternList'
 import Adapter from '../adapter'
-import CompatibilityForm from './CompatibilityForm'
+
 
 class EasternContainer extends React.Component{
 
@@ -9,18 +9,17 @@ class EasternContainer extends React.Component{
   {
     super(props)
     this.state = {
-      allSigns: props.allEast,
       partners:[],
       clicked: false
     }
   }
-
-  eastSign = () => {
-    const sign = this.state.allSigns.find(sign => sign.sign === this.props.eastern
-    )
-    return sign
-
-  }
+  //
+  // eastSign = () => {
+  //   const sign = this.props.allEast.find(sign => sign.sign === this.props.eastern
+  //   )
+  //   return sign
+  //
+  // }
 
   handleClick = () => {
     this.setState({
@@ -32,21 +31,24 @@ class EasternContainer extends React.Component{
     let description = ""
     if (this.state.clicked) {
       description = <div>
-        <img src={this.eastSign().img_url} />
-    <p>{this.eastSign().description}</p> -
-    <p>Lucky Colors: {this.eastSign().lucky_color} </p> -
-    <p>Lucky Numbers: {this.eastSign().lucky_number} </p>
+        <img src={this.props.currentUser.eastern.img_url} />
+    <p>{this.props.currentUser.eastern.description}</p> -
+    <p>Lucky Colors: {this.props.currentUser.eastern.lucky_color} </p> -
+    <p>Lucky Numbers: {this.props.currentUser.eastern.lucky_number} </p>
     <EasternList
-      users={this.props.users} partners={this.eastSign().eastern_partners} />
+      users={this.props.users} partners={this.props.currentUser.eastern.eastern_partners} />
 
     </div>
     }
-    console.log("GRANDCHILD eastern partners state", this.props.users)
+    console.log("GRANDCHILD eastern partners state", this.props.currentUser, this.props.users)
     return(
       <div>
-        <h2 onClick={this.handleClick}>{this.eastSign().sign}</h2>
-          {description}
-
+        {  !this.props.currentUser.eastern ? "Loading..." :
+          <div>
+            <h2 onClick={this.handleClick}>{this.props.currentUser.eastern.sign}</h2>
+            {description}
+          </div>
+        }
       </div>
     )
   }

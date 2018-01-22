@@ -21,10 +21,10 @@ class WesternContainer extends React.Component
     let description = ""
     if (this.state.clicked) {
       description = <div>
-        <img src={this.props.western.img_url} />
-        <p>Element: {this.props.western.element}</p> -
-        <p>Quality: {this.props.western.quality}</p> -
-        <p>Planet: {this.props.western.planet}</p> </div>
+        <img src={this.props.currentUser.western.img_url} />
+        <p>Element: {this.props.currentUser.western.element}</p>
+        <p>Quality: {this.props.currentUser.western.quality}</p>
+        <p>Planet: {this.props.currentUser.western.planet}</p> </div>
     }
     // t.string "sign"
     // t.string "element"
@@ -36,8 +36,12 @@ class WesternContainer extends React.Component
 
     return(
       <div>
-        <h1 onClick={this.handleClick}>Sign: {this.props.western.sign}</h1>
-        {description}
+        {  !this.props.currentUser.eastern ? "Loading..." :
+          <div>
+            <h1 onClick={this.handleClick}>Sign: {this.props.currentUser.western.sign}</h1>
+            {description}
+          </div>
+        }
       </div>
     )
   }

@@ -7,7 +7,7 @@ const Login = (props) =>
     <div >
       <form onSubmit={props.loginInput}>
         <input type="text" placeholder="Full Name" />
-        <button type="submit">Login</button>
+        <button className="ui green button" type="submit">Login</button>
       </form>
 
     </div>

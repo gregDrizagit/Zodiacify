@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import WesternContainer from './components/WesternContainer'
-import EasternContainer from './components/EasternContainer'
+// import App from './App.css'
+import NavBar from './components/NavBar'
 import Login from './components/Login'
 import UserContainer from './components/UserContainer'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
@@ -30,6 +30,12 @@ class App extends Component {
     }))
   }
 
+  updateCurrentUser = (json) => {
+    this.setState({
+      currentUser: json
+    })
+  }
+
   loginInput = (e) =>
   {
     e.preventDefault()
@@ -47,7 +53,6 @@ class App extends Component {
   }
 
 
-
   handleDateInput = (e) =>
   {
     this.setState({birthdate: new Date(e.target.value)});
@@ -55,10 +60,16 @@ class App extends Component {
   render() {
     return (
       <div>
+        <NavBar />
           <div>
             <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
-            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}
-              allEast={this.state.allEast}/>} />
+
+            <Route exact path="/user" render={() =>
+                <UserContainer
+                  users={this.state.users}
+                  updateCurrentUser={this.updateCurrentUser}
+                  currentUser={this.state.currentUser}
+                  allEast={this.state.allEast}/>} />
 
           </div>
       </div>

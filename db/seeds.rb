@@ -7,8 +7,26 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 elli = User.create(full_name: "Elli Shim", birthdate: '12/12/1990')
-joyce = User.create(full_name: "Joyce Park", birthdate: '5/10/1991')
+jon = User.create(full_name: "Jon Wu", birthdate: '23/7/1987')
 greg = User.create(full_name: "Greg Driza", birthdate: "22/10/1994")
+rochel = User.create(full_name: "Rochel Levi", birthdate: '27/2/1996')
+dan = User.create(full_name: "Dan O'Dea", birthdate: '18/6/1979')
+brendan = User.create(full_name: "Brendan McIlhenny", birthdate: '2/6/1993')
+erica = User.create(full_name: "Erica Li", birthdate: '4/4/1992')
+george = User.create(full_name: "Georce Gore", birthdate: '13/6/1993')
+josh = User.create(full_name: "Josh Wasserman", birthdate: '24/1/1995')
+paul = User.create(full_name: "Paul Kristapovich", birthdate: '9/3/1988')
+yuliya = User.create(full_name: "Yuliya Yasenetska", birthdate: '10/9/1992')
+priyam = User.create(full_name: "Priyam Sarma", birthdate: '1/1/1989')
+chris = User.create(full_name: "Chris Johnson", birthdate: '24/3/1999')
+jake = User.create(full_name: "Jake McNaughton", birthdate: '23/4/1988')
+seth = User.create(full_name: "Seth Barden", birthdate: '18/10/1986')
+joshS = User.create(full_name: "Josh Stillman", birthdate: '9/12/1983')
+kat = User.create(full_name: "Katerina Papacostas", birthdate: '22/3/1988')
+tashawn = User.create(full_name: "Tashawn Williams", birthdate: '31/3/1990')
+erick = User.create(full_name: "Erick Camacho", birthdate: '14/3/1995')
+connie = User.create(full_name: "Connie Wang", birthdate: '7/10/1994')
+silvia = User.create(full_name: "Silvia Chung", birthdate: '6/10/1994')
 
 
 # Western Horoscope

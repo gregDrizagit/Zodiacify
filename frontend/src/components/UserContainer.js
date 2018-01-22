@@ -10,25 +10,13 @@ class UserContainer extends React.Component
   {
     super()
     this.state = {
-      users: [],
-      allEast: [],
-      currentUser:"",
       easternSign:"",
       westernSign:{}
     }
   }
 
-  componentDidMount()
-  {
-
-    this.setState({
-      users: this.props.users,
-      currentUser: this.props.currentUser,
-      allEast: this.props.allEast
-    },
+  componentDidMount() {
     this.setSigns()
-    )
-
   }
 
   setSigns = () => {
@@ -36,21 +24,18 @@ class UserContainer extends React.Component
     this.setState({
       easternSign: this.calcuateChineseSign(),
       westernSign: this.calculateWesternSign()
-    })
+    }, this.updateUserSigns)
   }
 
-  componentDidUpdate()
-  {
-    if(this.state.easternSign !== "" && this.state.westernSign !== "")
-    {
-      this.updateUserSigns()
-    }
-  }
+  // componentDidUpdate()
+  // {
+  //   if(this.state.easternSign !== "" && this.state.westernSign !== "")
+  //   {
+  //     this.updateUserSigns()
+  //   }
+  // }
 
-  getUsers = () =>
-  {
-    return Adapter.getUsers()
-  }
+
 
   getSignDatabaseId = () =>
   {
@@ -58,12 +43,11 @@ class UserContainer extends React.Component
     return signs.indexOf(this.state.easternSign) + 1
   }
 
-  updateUserSigns = () => // move this too?
-  {
-    //We're doing something a little bit tricky here to associate our user with our eastern and western signs.
-    //We're using look
+  updateUserSigns = () => {
+
     let easternId = this.getSignDatabaseId()
-    Adapter.patchSignsToUser(this.state.currentUser, easternId, this.state.westernSign.databaseId)
+    Adapter.patchSignsToUser(this.props.currentUser, easternId, this.state.westernSign.databaseId)
+    .then(json => this.props.updateCurrentUser(json))
   }
 
   calculateWesternSign = () =>
@@ -91,8 +75,7 @@ class UserContainer extends React.Component
      return {sign: userSign, databaseId: zodiac[userSign][2]}
   }
 
-calcuateChineseSign = () =>
-{
+calcuateChineseSign = () => {
   const birthday = new Date(this.props.currentUser.birthdate).getUTCFullYear()
   const jiazi = 1924;
   const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
@@ -109,12 +92,12 @@ calcuateChineseSign = () =>
 
   render(){
 
-    console.log('PARENT in user render', this.state);
+    console.log('PARENT in user render', this.props.currentUser);
     return(
       <div>
         <MyPage
-          users={this.state.users} currentUser={this.state.currentUser}
-          allEast={this.state.allEast}
+          users={this.props.users} currentUser={this.props.currentUser}
+          allEast={this.props.allEast}
           eastern={this.state.easternSign}
           western={this.state.westernSign} />
       </div>
