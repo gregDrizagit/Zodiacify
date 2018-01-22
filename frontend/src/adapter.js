@@ -6,11 +6,6 @@ class Adapter
 
   }
 
-  static fetchEastSigns() {
-    return fetch("http://localhost:3001/easterns")
-    .then(resp => resp.json())
-  }
-
   static getEasternPartners(easternId)
   {
     return fetch(`http://localhost:3001/easterns/${easternId}`).then(resp => resp.json())
