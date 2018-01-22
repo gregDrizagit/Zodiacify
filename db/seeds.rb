@@ -7,6 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 elli = User.create(full_name: "Elli Shim", birthdate: '12/12/1990')
+joyce = User.create(full_name: "Joyce Park", birthdate: '5/10/1991')
+greg = User.create(full_name: "Greg Driza", birthdate: "22/10/1994")
+
 
 # Western Horoscope
 aries = Western.create(sign: 'aries', element: 'fire', quality: 'cardinal', planet: 'Mars', img_url: 'https://upload.wikimedia.org/wikipedia/commons/5/5e/Aries.svg', description: 'Aries rules the head and leads with the head, often literally walking head first, leaning forwards for speed and focus. Its representatives are naturally brave and rarely afraid of trial and risk. They possess youthful strength and energy, regardless of their age and quickly perform any given tasks.')

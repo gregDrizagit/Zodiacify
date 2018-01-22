@@ -4,6 +4,9 @@ import WesternContainer from "./WesternContainer"
 class MyPage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      compatability: ""
+    }
   }
 
   render(){
@@ -12,9 +15,12 @@ class MyPage extends React.Component {
         {
           this.props.users.length === 0 ? "Loading" :
           <div>
-            <h1>{this.props.users[0].full_name}</h1> - Eastern Zodiac Sign:
-             <EasternContainer eastern={this.props.users[0].eastern} />
-             <WesternContainer western={this.props.users[0].western} />
+            <h1>{this.props.currentUser.full_name}</h1>
+              <label>My Chinese Zodiac Info:</label>
+              <EasternContainer
+                allEast={this.props.allEast} eastern={this.props.eastern} />
+              <label>My Western Astrology Info:</label>
+              <WesternContainer western={this.props.western} />
           </div>
         }
       </div>

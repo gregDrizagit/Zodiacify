@@ -1,6 +1,7 @@
 import React from 'react'
 import EasternList from './EasternList'
 import Adapter from '../adapter'
+import CompatibilityForm from './CompatibilityForm'
 
 class EasternContainer extends React.Component{
 
@@ -8,25 +9,45 @@ class EasternContainer extends React.Component{
   {
     super(props)
     this.state = {
-      partners:[]
+      allSigns: props.allEast,
+      partners:[],
+      clicked: false
     }
   }
-  componentDidMount()
-  {
-    Adapter.getEasternPartners(this.props.eastern.id).then(partners => this.setState({partners: partners.eastern_partners}))
+
+
+  eastSign = () => {
+    const sign = this.state.allSigns.find(sign => sign.sign === this.props.eastern
+    )
+    return sign
+
+  }
+
+  handleClick = () => {
+    this.setState({
+      clicked: !this.state.clicked
+    })
   }
 
   render()
   {
-    console.log("eastern partners state", this.state.partners)
+    let description = ""
+    if (this.state.clicked) {
+      description = <div>
+        <img src={this.eastSign().img_url} />
+    <p>{this.eastSign().description}</p> -
+    <p>Lucky Colors: {this.eastSign().lucky_color} </p> -
+    <p>Lucky Numbers: {this.eastSign().lucky_number} </p>
+    <EasternList partners={this.eastSign().eastern_partners} />
+    <CompatibilityForm/>
+    </div>
+    }
+    console.log("eastern partners state", this.state)
     return(
       <div>
-        <h2>{this.props.eastern.sign}</h2> -
-        <p>{this.props.eastern.description}</p> -
-        <p>Lucky Color:{this.props.eastern.lucky_color} </p> -
-        <p>Lucky Number:{this.props.eastern.lucky_number} </p>
-        <img src={this.props.eastern.img_url} />
-        <EasternList partners={this.state.partners} />
+        <h2 onClick={this.handleClick}>{this.eastSign().sign}</h2>
+          {description}
+
       </div>
     )
   }

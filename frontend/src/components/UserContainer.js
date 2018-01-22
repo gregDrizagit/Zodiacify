@@ -2,31 +2,43 @@ import React from 'react'
 import Adapter from '../adapter';
 import MyPage from './MyPage'
 
+//NOTE: 1.21 will there be links to get compatibilities? info on other signs? a navbar up top?
+
 class UserContainer extends React.Component
 {
-
   constructor()
   {
     super()
     this.state = {
       users: [],
+      allEast: [],
       currentUser:"",
       easternSign:"",
       westernSign:{}
     }
-
   }
+
   componentDidMount()
   {
+
     this.setState({
       users: this.props.users,
-      currentUser: this.props.currentUser
+      currentUser: this.props.currentUser,
+      allEast: this.props.allEast
     },
-    () => this.setState({easternSign: this.calcuateChineseSign(),
-          westernSign: this.calculateWesternSign()})
-
+    this.setSigns()
     )
+
   }
+
+  setSigns = () => {
+
+    this.setState({
+      easternSign: this.calcuateChineseSign(),
+      westernSign: this.calculateWesternSign()
+    })
+  }
+
   componentDidUpdate()
   {
     if(this.state.easternSign !== "" && this.state.westernSign !== "")
@@ -39,6 +51,7 @@ class UserContainer extends React.Component
   {
     return Adapter.getUsers()
   }
+
   getSignDatabaseId = () =>
   {
     const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
@@ -56,7 +69,7 @@ class UserContainer extends React.Component
   calculateWesternSign = () =>
   {
     // assign all the user birth years to 1900
-    const birthday = new Date(this.state.currentUser.birthdate)
+    const birthday = new Date(this.props.currentUser.birthdate)
     birthday.setFullYear(1900)
     let zodiac =
     {
@@ -80,8 +93,7 @@ class UserContainer extends React.Component
 
 calcuateChineseSign = () =>
 {
-
-  const birthday = new Date(this.state.currentUser.birthdate).getUTCFullYear()
+  const birthday = new Date(this.props.currentUser.birthdate).getUTCFullYear()
   const jiazi = 1924;
   const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
 
@@ -96,12 +108,17 @@ calcuateChineseSign = () =>
 }
 
   render()
-  {
+  {console.log('in user render', this.state);
     return(
       <div>
-        <MyPage users={this.state.users} />
+        <MyPage
+          users={this.state.users} currentUser={this.state.currentUser}
+          allEast={this.state.allEast}
+          eastern={this.state.easternSign}
+          western={this.state.westernSign} />
       </div>
     )
   }
 }
+
 export default UserContainer

@@ -14,11 +14,16 @@ class App extends Component {
     super()
     this.state = {
       users: [],
+      allEast: [],
       currentUser: ""
     }
   }
   componentDidMount()
   {
+    Adapter.fetchEastSigns()
+    .then(signs => this.setState({
+      allEast: signs
+    }))
     Adapter.getUsers()
     .then(users => this.setState({
       users: users
@@ -30,10 +35,12 @@ class App extends Component {
     e.preventDefault()
     const user = this.state.users.find(user => user.full_name.toLowerCase().includes(e.target[0].value.toLowerCase()))
     if (user) {
+
       this.setState({
         currentUser: user
       }, this.props.history.push("user"))
     } else {
+
       alert("Not a valid user!")
     }
 
@@ -46,12 +53,13 @@ class App extends Component {
     this.setState({birthdate: new Date(e.target.value)});
   }
   render() {
+    console.log(this.state);
     return (
       <div>
           <div>
             <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
-            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}/>} />
-            // <Route exact path="/western" render={WesternContainer} />
+            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}
+              allEast={this.state.allEast}/>} />
 
           </div>
       </div>
@@ -60,6 +68,7 @@ class App extends Component {
   }
 }
 
-// name={this.state.fullName} birthdate={this.state.birthdate}
 
 export default withRouter(App);
+
+// <Route exact path="/western" render={WesternContainer} />
