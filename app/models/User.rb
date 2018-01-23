@@ -1,5 +1,5 @@
 class User < ApplicationRecord
   has_secure_password
-  has_one :eastern
-  has_one :western
+  belongs_to :eastern, optional: true
+  belongs_to :western, optional: true
 end

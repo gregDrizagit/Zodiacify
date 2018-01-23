@@ -22,6 +22,8 @@ class EasternContainer extends React.Component{
         {
           if(user.eastern.sign === partner.sign)
           {
+            console.log("user:", user.eastern.sign)
+            console.log("partner:", partner.sign) 
             compatibleUsers.push(user)
           }
         }
