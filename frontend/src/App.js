@@ -43,18 +43,11 @@ class App extends Component {
     )
   }
 
-  loginInput = (e) =>
+  loginInput = (user) =>
   {
-    e.preventDefault()
-    const user = this.state.users.find(user => user.full_name.toLowerCase().includes(e.target[0].value.toLowerCase()))
-    if (user) {
-      this.setState({
-        currentUser: user
-      }, this.props.history.push("user"))
-    } else {
-      alert("Not a valid user!")
-    }
-    console.log("log in")
+    this.setState({
+      currentUser: user
+    }, ()=>this.props.history.push("user"))
   }
 
   handleDateInput = (e) =>
@@ -70,7 +63,8 @@ class App extends Component {
 
           <div>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/login" render={() => <Login loginInput={this.loginInput} />}/>
+            <Route exact path="/login" render={() => <Login   loginInput={this.loginInput}
+            users={this.state.users}   />}/>
             <Route exact path="/user" render={() =><UserContainer
                 users={this.state.users} currentUser={this.state.currentUser}/>} />
             <Route exact path='/eastdetails' component={()=><EasternDetail allSigns={this.state.allEastSigns}/>}/>

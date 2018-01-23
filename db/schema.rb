@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180123040126) do
+ActiveRecord::Schema.define(version: 20180123190548) do
 
   create_table "compatibilities", force: :cascade do |t|
     t.integer "eastern_id"
@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 20180123040126) do
     t.string "lucky_color"
     t.string "img_url"
     t.integer "user_id"
-    t.string "horoscope"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "full_name"
     t.datetime "birthdate"
+    t.string "password_digest"
   end
 
   create_table "westerns", force: :cascade do |t|

@@ -6,7 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-elli = User.create(full_name: "Elli Shim", birthdate: '12/12/1990')
+elli = User.create(full_name: "Elli Shim", birthdate: '12/12/1990', password:"123")
 jon = User.create(full_name: "Jon Wu", birthdate: '23/7/1987')
 greg = User.create(full_name: "Greg Driza", birthdate: "22/10/1994")
 rochel = User.create(full_name: "Rochel Levi", birthdate: '27/2/1996')

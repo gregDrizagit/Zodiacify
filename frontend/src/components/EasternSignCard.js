@@ -16,7 +16,7 @@ class EasternSignCard extends React.Component {
   }
 
   render() {
-    const detail = (<div className='column'>
+    const detail = (<div className='column signTile'>
       <p>Traits: {this.props.sign.description}</p>
       <p>Lucky Number: {this.props.sign.lucky_number}</p>
       <p>Lucky Color: {this.props.sign.lucky_color}</p>
@@ -27,7 +27,7 @@ class EasternSignCard extends React.Component {
         className="column"
         onClick={this.handleClick}><center>
           <img src={this.props.sign.img_url}/>
-          
+
         </center></div>
         {this.state.clicked ? detail : ""}
       </div>

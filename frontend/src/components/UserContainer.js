@@ -20,8 +20,8 @@ class UserContainer extends React.Component
   }
 
   componentDidMount()
-  {
-    if(this.state.currentUser.eastern && this.state.currentUser.western)
+  { console.log("in user mount", this.props.currentUser);
+    if(this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western)
     {
     }else{
       this.updateUserSigns()

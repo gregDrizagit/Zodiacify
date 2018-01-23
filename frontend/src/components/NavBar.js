@@ -4,7 +4,7 @@ import {NavLink} from 'react-router-dom';
 const link = {
   width: '100px',
   padding: '12px',
-  margin: '0 6px 6px',
+  margin: '6px 6px 6px',
   background: 'blue',
   textDecoration: 'none',
   color: 'white',
@@ -12,7 +12,7 @@ const link = {
 
 const NavBar = () => {
   return (
-    <div className="ui fixed top menu">
+    <div className="ui fixed top inverted green menu">
       <h2 className="header item">Psych</h2>
       <NavLink to="/" exact style={link} activeStyle={{
         background: 'darkblue'

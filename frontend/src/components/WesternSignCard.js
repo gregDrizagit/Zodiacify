@@ -16,7 +16,7 @@ class WesternSignCard extends React.Component {
   }
 
   render() {
-    const detail = (<div className='column'>
+    const detail = (<div className='column signTile'>
       <p>Traits: {this.props.sign.description}</p>
       <p>Planet: {this.props.sign.planet}</p>
       <p>Quality: {this.props.sign.quality}</p>

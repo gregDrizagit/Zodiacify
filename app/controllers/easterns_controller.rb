@@ -16,6 +16,6 @@ class EasternsController < ApplicationController
 
   private
   def chinese_params
-    params.require(:eastern).permit(:name, :description, :lucky_number, :lucky_color, :img_url, :horoscope)
+    params.require(:eastern).permit(:name, :description, :lucky_number, :lucky_color, :img_url)
   end
 end

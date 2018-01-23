@@ -45,5 +45,16 @@ class Adapter
     .then(res => res.json())
   }
 
+  static postToAuth(full_name, password) {
+    return fetch('http://localhost:3001/auth/', {
+      method: 'POST',
+      headers:{
+        "Content-Type": "application/json",
+        "Accept": "application/json"
+      },
+      body: JSON.stringify({full_name, password})
+    }).then(res => res.json())
+  }
+
 }
 export default Adapter;
