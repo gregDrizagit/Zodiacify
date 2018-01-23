@@ -25,11 +25,8 @@ class UserContainer extends React.Component
     }else{
       this.updateUserSigns()
     }
-
-
   }
-
-
+  
   getUsers = () =>
   {
     return Adapter.getUsers()
