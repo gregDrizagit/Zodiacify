@@ -15,6 +15,7 @@ class MyPage extends React.Component {
             <h1>{this.props.currentUser.full_name}</h1>
               <label>My Chinese Zodiac Info:</label>
               <EasternContainer
+                renderPartner={this.props.renderPartner}
                 users={this.props.users}
                 currentUser={this.props.currentUser}
               />

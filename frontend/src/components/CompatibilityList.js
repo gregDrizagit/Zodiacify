@@ -3,7 +3,7 @@ import CompatibilityCard from './CompatibilityCard'
   const CompatibilityList = (props) =>
   {
     console.log(props)
-     const compatibilityCards = props.users.map(user=>{return <li><CompatibilityCard user={user}/></li>})
+     const compatibilityCards = props.users.map(user=>{return <li><CompatibilityCard renderPartner={props.renderPartner} user={user}/></li>})
     return(
       <div>
         <h3>Compatible Users</h3>

@@ -38,7 +38,7 @@ class EasternContainer extends React.Component{
   render() {
 
     console.log("GRANDCHILD eastern partners state", this.props.currentUser)
-     this.showCompatibleUsers(this.props.currentUser, this.props.users)
+
     return(
       <div>
         <h1>Eastern Container </h1>
@@ -52,7 +52,9 @@ class EasternContainer extends React.Component{
             <p>{this.props.currentUser.eastern.description}</p> -
             <h3>Compatible Signs</h3>
             <ul>{this.props.currentUser.eastern.eastern_partners.map(partner =>{ return <li>{partner.sign}</li>})}</ul>
-            <CompatibilityList users={this.showCompatibleUsers(this.props.currentUser, this.props.users)} />
+            <CompatibilityList
+              renderPartner={this.props.renderPartner}
+               users={this.showCompatibleUsers(this.props.currentUser, this.props.users)} />
           </div>
             :
             <p>Loading</p>
