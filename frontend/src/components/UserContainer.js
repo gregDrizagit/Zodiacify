@@ -14,7 +14,8 @@ class UserContainer extends React.Component
       users: this.props.users,
       currentUser: this.props.currentUser,
       easternSign: "",
-      westernSign: ""
+      westernSign: "",
+      partnerProf: ""
     }
   }
 
@@ -25,10 +26,7 @@ class UserContainer extends React.Component
     }else{
       this.updateUserSigns()
     }
-
-
   }
-
 
   getUsers = () =>
   {
@@ -93,12 +91,30 @@ calculateChineseSign = () =>
   return years[birthday]
 }
 
-  render(){
+  renderPartner = (user) => {
+    this.setState({
+      partnerProf: user
+    })
+  }
 
+  render(){
+    console.log("in user container", this.state);
     return(
       <div>
         {this.state.users && this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western ?
-          <MyPage users={this.state.users} currentUser={this.state.currentUser} />
+          <div className='ui relaxed two column grid'>
+            <div className="column">
+              <MyPage renderPartner={this.renderPartner} users={this.state.users} currentUser={this.state.currentUser} />
+            </div>
+
+          {this.state.partnerProf ?
+            <div className="column">
+              <MyPage renderPartner={this.renderPartner} users={this.state.users} currentUser={this.state.partnerProf} />
+            </div>
+            :
+            ""
+          }
+          </div>
           :
           <h1>Loading</h1>
         }

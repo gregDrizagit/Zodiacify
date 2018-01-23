@@ -43,12 +43,6 @@ class App extends Component {
     )
   }
 
-  updateCurrentUser = (json) => {
-    this.setState({
-      currentUser: json
-    })
-  }
-
   loginInput = (e) =>
   {
     e.preventDefault()
@@ -60,9 +54,7 @@ class App extends Component {
     } else {
       alert("Not a valid user!")
     }
-
     console.log("log in")
-
   }
 
   handleDateInput = (e) =>
@@ -77,9 +69,10 @@ class App extends Component {
         </div>
 
           <div>
-            <Route exact path="/" render={Home}/>
+            <Route exact path="/" component={Home}/>
             <Route exact path="/login" render={() => <Login loginInput={this.loginInput} />}/>
-            <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}/>} />
+            <Route exact path="/user" render={() =><UserContainer
+                users={this.state.users} currentUser={this.state.currentUser}/>} />
             <Route exact path='/eastdetails' component={()=><EasternDetail allSigns={this.state.allEastSigns}/>}/>
             <Route exact path='/westdetails' component={()=><WesternDetail allSigns={this.state.allWestSigns}/>}/>
 
