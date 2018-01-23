@@ -25,11 +25,12 @@ ActiveRecord::Schema.define(version: 20180118211844) do
     t.string "lucky_number"
     t.string "lucky_color"
     t.string "img_url"
-    t.integer "user_id"
   end
 
   create_table "users", force: :cascade do |t|
     t.string "full_name"
+    t.integer "eastern_id"
+    t.integer "western_id"
     t.datetime "birthdate"
   end
 
@@ -38,7 +39,6 @@ ActiveRecord::Schema.define(version: 20180118211844) do
     t.string "element"
     t.string "quality"
     t.string "planet"
-    t.integer "user_id"
     t.string "img_url"
     t.string "description"
   end
