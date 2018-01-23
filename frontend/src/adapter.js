@@ -3,7 +3,16 @@ class Adapter
   static getUsers()
   {
     return fetch('http://localhost:3001/users').then(resp => resp.json())
+  }
 
+  static getAllEastSigns() {
+    return fetch('http://localhost:3001/easterns')
+    .then(res => res.json())
+  }
+
+  static getAllWestSigns() {
+    return fetch('http://localhost:3001/westerns')
+    .then(res => res.json())
   }
 
   static getEasternPartners(easternId)

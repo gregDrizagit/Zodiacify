@@ -16,6 +16,6 @@ class WesternsController < ApplicationController
 
   private
   def western_params
-    params.require(:western).permit(:sign, :element, :quality, :planet)
+    params.require(:western).permit(:sign, :element, :quality, :planet, :horoscope)
   end
 end

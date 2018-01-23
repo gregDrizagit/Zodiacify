@@ -1,7 +1,11 @@
 import React, { Component } from 'react';
+import './App.css'
 import NavBar from './components/NavBar'
 import Login from './components/Login'
+import Home from './components/Home'
 import UserContainer from './components/UserContainer'
+import EasternDetail from './components/EasternDetail'
+import WesternDetail from './components/WesternDetail'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
 import Adapter from './adapter'
 
@@ -13,7 +17,10 @@ class App extends Component {
     super()
     this.state = {
       users: [],
-      currentUser: null
+      currentUser: null,
+      allEastSigns: [],
+      allWestSigns: []
+
     }
   }
   componentDidMount()
@@ -22,6 +29,18 @@ class App extends Component {
     .then(users => this.setState({
       users: users
     }))
+    Adapter.getAllEastSigns()
+    .then(signs =>
+      this.setState({
+        allEastSigns: signs
+      })
+    )
+    Adapter.getAllWestSigns()
+    .then(signs =>
+      this.setState({
+        allWestSigns: signs
+      })
+    )
   }
 
   updateCurrentUser = (json) => {
@@ -53,10 +72,17 @@ class App extends Component {
   render() {
     return (
       <div>
-        <NavBar />
+        <div>
+          <NavBar /><br/>
+        </div>
+
           <div>
-            <Route exact path="/" render={() => <Login loginInput={this.loginInput} />}/>
+            <Route exact path="/" render={Home}/>
+            <Route exact path="/login" render={() => <Login loginInput={this.loginInput} />}/>
             <Route exact path="/user" render={() => <UserContainer users={this.state.users} currentUser={this.state.currentUser}/>} />
+            <Route exact path='/eastdetails' component={()=><EasternDetail allSigns={this.state.allEastSigns}/>}/>
+            <Route exact path='/westdetails' component={()=><WesternDetail allSigns={this.state.allWestSigns}/>}/>
+
           </div>
       </div>
 
