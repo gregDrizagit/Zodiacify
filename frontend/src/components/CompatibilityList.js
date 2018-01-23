@@ -5,7 +5,10 @@ import CompatibilityCard from './CompatibilityCard'
     console.log(props)
      const compatibilityCards = props.users.map(user=>{return <li><CompatibilityCard user={user}/></li>})
     return(
-      <ul>{compatibilityCards}</ul>
+      <div>
+        <h3>Compatible Users</h3>
+        <ul>{compatibilityCards}</ul>
+      </div>
     )
   }
 export default CompatibilityList

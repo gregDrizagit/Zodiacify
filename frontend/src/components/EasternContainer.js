@@ -48,6 +48,8 @@ class EasternContainer extends React.Component{
             <p>{this.props.currentUser.eastern.lucky_color}</p> -
             <p>{this.props.currentUser.eastern.lucky_number}</p> -
             <p>{this.props.currentUser.eastern.description}</p> -
+            <h3>Compatible Signs</h3>
+            <ul>{this.props.currentUser.eastern.eastern_partners.map(partner =>{ return <li>{partner.sign}</li>})}</ul>
             <CompatibilityList users={this.showCompatibleUsers(this.props.currentUser, this.props.users)} />
           </div>
             :

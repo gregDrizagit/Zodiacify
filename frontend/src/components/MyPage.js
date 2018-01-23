@@ -3,7 +3,7 @@ import EasternContainer from "./EasternContainer"
 import WesternContainer from "./WesternContainer"
 class MyPage extends React.Component {
 
-  
+
 
   render(){
     console.log('CHILD in my page', this.props.currentUser)
@@ -19,7 +19,7 @@ class MyPage extends React.Component {
                 currentUser={this.props.currentUser}
               />
               <label>My Western Astrology Info:</label>
-              <WesternContainer western={this.props.currentUser} />
+              <WesternContainer currentUser={this.props.currentUser} />
           </div>
         }
       </div>

@@ -3,7 +3,7 @@ import React from 'react'
   {
     return(
       <div>
-        <h3>{props.user.full_name}</h3>
+        <h3>{props.user.full_name} - {props.user.eastern.sign}</h3>
       </div>
     )
   }
