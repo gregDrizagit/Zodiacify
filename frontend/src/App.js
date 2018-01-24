@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-import './App.css'
-import NavBar from './components/NavBar'
-import Login from './components/Login'
-import Home from './components/Home'
-import UserContainer from './components/UserContainer'
-import EasternDetail from './components/EasternDetail'
-import WesternDetail from './components/WesternDetail'
 import { BrowserRouter as Router, Route, withRouter} from 'react-router-dom';
+import './App.css'
 import Adapter from './adapter'
-
-//TODO: 1. open up login form, put in name, find name in list of names in state 2. then input as prop into UserContainer -> then send that info to a MyPage container and render My info.
+import EasternDetail from './components/EasternDetail'
+import Home from './components/Home'
+import Login from './components/Login'
+import NavBar from './components/NavBar'
+import UserContainer from './components/UserContainer'
+import WesternDetail from './components/WesternDetail'
 
 class App extends Component {
-  constructor()
-  {
+  constructor() {
     super()
     this.state = {
       users: [],
       currentUser: null,
       allEastSigns: [],
       allWestSigns: []
-
     }
   }
+
   componentDidMount()
   {
-    // const token = localStorage.getItem('token')
-    // token ? Adapter.getCurrentUserAuth().then(res => console.log) : null
+    // debugger
+    const token = localStorage.getItem('token')
+    token ? Adapter.getCurrentUserAuth().then(user=>this.setState({
+      currentUser: user
+    })) : null
     Adapter.getUsers()
     .then(users => this.setState({
       users: users
@@ -45,16 +45,14 @@ class App extends Component {
     )
   }
 
-  loginInput = (user) =>
-  {
+  loginInput = (user) => {
     localStorage.setItem('token', user.id)
     this.setState({
       currentUser: user
     }, ()=>this.props.history.push("user"))
   }
 
-  handleDateInput = (e) =>
-  {
+  handleDateInput = (e) => {
     this.setState({birthdate: new Date(e.target.value)});
   }
 
@@ -64,29 +62,33 @@ class App extends Component {
       currentUser: null
     }, ()=>this.props.history.push("login"))
   }
+
   render() {
     return (
       <div>
         <div>
-          <NavBar currentUser={this.state.currentUser} handleLogout={this.handleLogout}/><br/>
+          <NavBar
+            currentUser={this.state.currentUser} handleLogout={this.handleLogout}/><br/>
         </div>
 
           <div>
             <Route exact path="/" component={Home}/>
-            <Route exact path="/login" render={() => <Login   loginInput={this.loginInput}
-            users={this.state.users}   />}/>
-            <Route exact path="/user" render={() =><UserContainer
-                users={this.state.users} currentUser={this.state.currentUser}/>} />
-            <Route exact path='/eastdetails' component={()=><EasternDetail allSigns={this.state.allEastSigns}/>}/>
-            <Route exact path='/westdetails' component={()=><WesternDetail allSigns={this.state.allWestSigns}/>}/>
-
+            <Route exact path="/login" render={() =>
+                <Login
+                  loginInput={this.loginInput}
+                  users={this.state.users} />}/>
+            <Route exact path="/user" render={() =>
+                <UserContainer
+                users={this.state.users} currentUser={this.state.currentUser}/>}/>
+            <Route exact path='/eastdetails' component={()=>
+                <EasternDetail allSigns={this.state.allEastSigns}/>}/>
+            <Route exact path='/westdetails' component={()=>
+                <WesternDetail allSigns={this.state.allWestSigns}/>}/>
           </div>
       </div>
-
     )
   }
 }
-
 
 export default withRouter(App);
 

@@ -13,8 +13,7 @@ class WesternContainer extends React.Component {
     })
   )
 
-  render()
-  {
+  render() {
     console.log(this.props.currentUser.western)
     const front = (
       <div className="ui card" onClick={this.handleClick}>
@@ -59,10 +58,5 @@ class WesternContainer extends React.Component {
     )
   }
 }
-export default WesternContainer
 
-// <h1>{this.props.currentUser.western.sign}</h1>
-// // <p>{this.props.currentUser.western.element}</p> -
-//   <p>{this.props.currentUser.western.quality}</p> -
-//     <p>{this.props.currentUser.western.planet}</p> -
-//       <p>{this.props.currentUser.western.description}</p> -
+export default WesternContainer

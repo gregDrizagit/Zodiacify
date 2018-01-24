@@ -3,7 +3,7 @@ import EasternList from './EasternList'
 import Adapter from '../adapter'
 import CompatibilityList from './CompatibilityList'
 
-class EasternContainer extends React.Component{
+class EasternContainer extends React.Component {
   constructor(props){
     super(props);
     this.state = {
@@ -11,17 +11,12 @@ class EasternContainer extends React.Component{
     }
   }
 
-  showCompatibleUsers = (currentUser, users) =>
-  {
-    //if user.eastern.sign is contained in currentUser.eastern_partners
-      //collect that users
+  showCompatibleUsers = (currentUser, users) => {
     const compatibleUsers = []
     currentUser.eastern.eastern_partners.forEach(partner => {
       users.forEach(user => {
-        if(user.eastern)
-        {
-          if(user.eastern.sign === partner.sign)
-          {
+        if(user.eastern) {
+          if(user.eastern.sign === partner.sign) {
             console.log("user:", user.eastern.sign)
             console.log("partner:", partner.sign)
             compatibleUsers.push(user)
@@ -29,9 +24,7 @@ class EasternContainer extends React.Component{
         }
       })
     })
-
     console.log("compatible users", compatibleUsers)
-
      return compatibleUsers
   }
 
@@ -42,8 +35,8 @@ class EasternContainer extends React.Component{
   )
 
   render() {
-
     console.log("GRANDCHILD eastern partners state", this.props.currentUser)
+
     const front = (
       <div className="ui card" onClick={this.handleClick}>
         <a class="image" href="#">
@@ -77,8 +70,7 @@ class EasternContainer extends React.Component{
 
     return(
       <div>
-        {
-          this.props.currentUser && this.props.users ?
+        { this.props.currentUser && this.props.users ?
           <div>
             {this.state.clicked ? back : front}
           </div>
@@ -89,4 +81,5 @@ class EasternContainer extends React.Component{
     )
   }
 }
+
 export default EasternContainer

@@ -1,7 +1,6 @@
 import React from 'react'
 
-const EasternList = (props) =>
-{
+const EasternList = (props) => {
   const arrOfPartners = props.partners.map(partner => partner.sign)
 
   const filteredCompatibleUsers = () => {
@@ -34,4 +33,5 @@ const EasternList = (props) =>
     </div>
   )
 }
+
 export default EasternList

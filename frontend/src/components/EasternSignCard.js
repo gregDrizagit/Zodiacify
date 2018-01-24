@@ -27,8 +27,8 @@ class EasternSignCard extends React.Component {
         className="column"
         onClick={this.handleClick}><center>
           <img src={this.props.sign.img_url}/>
-
         </center></div>
+
         {this.state.clicked ? detail : ""}
       </div>
     )

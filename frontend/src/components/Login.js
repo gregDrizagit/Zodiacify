@@ -30,7 +30,6 @@ class Login extends React.Component {
       alert("Not a valid user!")
     }
     console.log("log in")
-
   }
 
   render() {

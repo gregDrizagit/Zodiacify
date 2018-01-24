@@ -2,57 +2,41 @@ import React from 'react'
 import Adapter from '../adapter';
 import MyPage from './MyPage'
 
-//NOTE: 1.21 will there be links to get compatibilities? info on other signs? a navbar up top?
-
-class UserContainer extends React.Component
-{
-  constructor(props)
-  {
-    super(props)
+class UserContainer extends React.Component {
+  constructor(props) {
+    super(props);
     console.log("user container mounting")
+    // debugger
     this.state = {
-      users: this.props.users,
-      currentUser: this.props.currentUser,
       easternSign: "",
       westernSign: "",
       partnerProf: ""
     }
   }
 
-  componentDidMount()
-  { console.log("in user mount", this.props.currentUser);
-    if(this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western)
-    {
-    }else{
+  componentDidMount() {
+    // !this.props.currentUser.eastern && !this.props.currentUser.western
+    console.log("in user mount", this.props.currentUser);
+    if (!this.props.currentUser) {
+    } else {
+      debugger
       this.updateUserSigns()
     }
   }
 
-  getUsers = () =>
-  {
-    return Adapter.getUsers()
-  }
-
-  getSignDatabaseId = () =>
-  {
+  getSignDatabaseId = () => {
     const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
     return signs.indexOf(this.calculateChineseSign()) + 1
   }
 
-  updateUserSigns = () => // move this too?
-  {
-    //We're doing something a little bit tricky here to associate our user with our eastern and western signs.
-    //We're using look
-
+  updateUserSigns = () => {
     let easternId = this.getSignDatabaseId()
     let westernId = this.calculateWesternSign()
     console.log("patch")
-    Adapter.patchSignsToUser(this.state.currentUser, easternId, westernId.databaseId).then(user => this.setState({currentUser: user}))
+    Adapter.patchSignsToUser(this.props.currentUser, easternId, westernId.databaseId).then(user => this.setState({currentUser: user}))
   }
 
-  calculateWesternSign = () =>
-  {
-    // assign all the user birth years to 1900
+  calculateWesternSign = () => {
     const birthday = new Date(this.props.currentUser.birthdate)
     birthday.setFullYear(1900)
     let zodiac =
@@ -75,16 +59,14 @@ class UserContainer extends React.Component
      return {sign: userSign, databaseId: zodiac[userSign][2]}
   }
 
-calculateChineseSign = () =>
-{
+calculateChineseSign = () => {
   const birthday = new Date(this.props.currentUser.birthdate).getUTCFullYear()
   const jiazi = 1924;
   const signs = ["rat", "ox", "tiger", "rabbit", "dragon", "snake", "horse", "sheep", "monkey", "rooster", "dog", "pig"];
 
   const years = {}
   let animalsIndex = 0
-  for(let i = jiazi; i < 2024; i++)
-  {
+  for(let i = jiazi; i < 2024; i++) {
    years[i] = signs[animalsIndex]
    animalsIndex === signs.length-1 ? animalsIndex = 0 : animalsIndex++
   }
@@ -101,15 +83,15 @@ calculateChineseSign = () =>
     console.log("in user container", this.state);
     return(
       <div>
-        {this.state.users && this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western ?
+        {this.props.users && this.props.currentUser && this.props.currentUser.eastern && this.props.currentUser.western ?
           <div className='ui relaxed two column grid'>
             <div className="column"><center>
-              <MyPage renderPartner={this.renderPartner} users={this.state.users} currentUser={this.state.currentUser} />
+              <MyPage renderPartner={this.renderPartner} users={this.props.users} currentUser={this.props.currentUser} />
             </center></div>
 
           {this.state.partnerProf ?
             <div className="column">
-              <MyPage renderPartner={this.renderPartner} users={this.state.users} currentUser={this.state.partnerProf} />
+              <MyPage renderPartner={this.renderPartner} users={this.props.users} currentUser={this.state.partnerProf} />
             </div>
             :
             ""

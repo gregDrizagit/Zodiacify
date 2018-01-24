@@ -60,7 +60,7 @@ class Adapter
   }
 
   static getCurrentUserAuth() {
-    fetch('http://localhost:3001/current_user/', {
+    return fetch('http://localhost:3001/current_user/', {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
