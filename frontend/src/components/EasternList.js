@@ -24,7 +24,7 @@ const EasternList = (props) => {
   return(
 
     <div>
-      {  !props.partners && !props.users ? "Loading..." :
+      {  !props.partners && !props.users ? <div class="loader"></div> :
         <div>
           <p>Eastern Zodiac Compatibilities: </p>
           <ul>{pleaseRender()}</ul>

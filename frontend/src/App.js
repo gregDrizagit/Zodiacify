@@ -63,6 +63,10 @@ class App extends Component {
     }, ()=>this.props.history.push("login"))
   }
 
+  updateUser = (currentUser, east, west) => {
+    Adapter.patchSignsToUser(currentUser, east, west).then(user => this.setState({currentUser: user}))
+  }
+
   render() {
     return (
       <div>
@@ -79,7 +83,8 @@ class App extends Component {
                   users={this.state.users} />}/>
             <Route exact path="/user" render={() =>
                 <UserContainer
-                users={this.state.users} currentUser={this.state.currentUser}/>}/>
+                users={this.state.users} currentUser={this.state.currentUser}
+                updateUser={this.updateUser}/>}/>
             <Route exact path='/eastdetails' component={()=>
                 <EasternDetail allSigns={this.state.allEastSigns}/>}/>
             <Route exact path='/westdetails' component={()=>

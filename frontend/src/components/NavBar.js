@@ -5,10 +5,10 @@ const link = {
   width: '100px',
   padding: '12px',
   margin: '6px 6px 6px',
-  background: 'blue',
+  // background: 'blue',
   textDecoration: 'none',
   color: 'white',
-  border: 'dotted',
+  // border: 'solid',
 }
 
 const NavBar = (props) => {
@@ -17,37 +17,24 @@ const NavBar = (props) => {
   {props.currentUser ? loggedIn = !!props.currentUser.id : ""}
 
   return (
-    <div className="ui fixed top inverted red menu">
+    <div className="ui fixed top inverted black menu">
       <h2 className="header item">
         <div className="content">
           <p className="title">Psych</p>
         </div>
-        <img src='https://d30y9cdsu7xlg0.cloudfront.net/png/138962-200.png' className="image"/>
+        <img src={require('../image.png')} className="image"/>
       </h2>
       <NavLink to="/"
         exact style={link}
         activeStyle={{
-        background: 'darkblue'
+        'border-bottom': 'solid'
       }}>Home</NavLink>
-
-      {loggedIn ?
-        <a style={link}
-          className="item"
-          onClick={props.handleLogout}>
-          <div >Log Out</div>
-        </a>
-      :
-       <NavLink to="/login"
-         exact style={link}
-         activeStyle={{
-           background: 'darkblue'
-      }}>Login</NavLink>}
 
       {loggedIn ?
         <NavLink to="/eastdetails"
           exact style={link}
           activeStyle={{
-          background: 'darkblue'
+          'border-bottom': 'solid'
         }}>Chinese Zodiac</NavLink>
       :
         <a
@@ -60,10 +47,25 @@ const NavBar = (props) => {
         <NavLink to="/westdetails"
           exact style={link}
           activeStyle={{
-          background: 'darkblue'
+          'border-bottom': 'solid'
         }}>Western Astrology</NavLink>
       :
         <a style={link} className="item"><div >Western Astrology</div></a>}
+
+      {loggedIn ?
+        <div className="right menu"><a style={link}
+          className="item"
+          onClick={props.handleLogout}>
+          <div >Log Out</div>
+        </a></div>
+      :
+       <div className="right menu"><NavLink to="/login"
+         exact style={link}
+         activeStyle={{
+           'border-bottom': 'solid'
+      }}>Login</NavLink></div>}
+
+
 
       {loggedIn ? <div className="item">{`Welcome ${props.currentUser.full_name}!`}</div>
     : null}

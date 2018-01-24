@@ -75,7 +75,7 @@ class EasternContainer extends React.Component {
             {this.state.clicked ? back : front}
           </div>
             :
-            <p>Loading</p>
+            <div class="loader"></div>
         }
       </div>
     )

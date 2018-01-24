@@ -33,7 +33,8 @@ class UserContainer extends React.Component {
     let easternId = this.getSignDatabaseId()
     let westernId = this.calculateWesternSign()
     console.log("patch")
-    Adapter.patchSignsToUser(this.props.currentUser, easternId, westernId.databaseId).then(user => this.setState({currentUser: user}))
+    this.props.updateUser(this.props.currentUser, easternId, westernId.databaseId)
+    // Adapter.patchSignsToUser(this.props.currentUser, easternId, westernId.databaseId).then(user => this.setState({currentUser: user}))
   }
 
   calculateWesternSign = () => {
@@ -98,7 +99,7 @@ calculateChineseSign = () => {
           }
           </div>
           :
-          <h1>Loading</h1>
+          <div class="loader"></div>
         }
       </div>
     )

@@ -7,7 +7,7 @@ class MyPage extends React.Component {
     console.log('CHILD in my page', this.props.currentUser)
     return(
       <div>
-        { this.props.users.length === 0 ? "Loading..." :
+        { this.props.users.length === 0 ? <div class="loader"></div> :
           <div>
             <h1>{this.props.currentUser.full_name}</h1>
               <h2>Chinese Zodiac</h2>
