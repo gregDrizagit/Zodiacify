@@ -1,5 +1,8 @@
+const token = localStorage.getItem('token')
+
 class Adapter
 {
+
   static getUsers()
   {
     return fetch('http://localhost:3001/users').then(resp => resp.json())
@@ -54,6 +57,17 @@ class Adapter
       },
       body: JSON.stringify({full_name, password})
     }).then(res => res.json())
+  }
+
+  static getCurrentUserAuth() {
+    fetch('http://localhost:3001/current_user/', {
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+        'Authorization': token
+      }
+    })
+    .then(res => res.json())
   }
 
 }

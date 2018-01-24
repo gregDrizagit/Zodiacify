@@ -11,10 +11,13 @@ class AuthController < ApplicationController
   end
 
   def show
+    token = request.headers['Authorization']
+    current_user = User.find_by(id: token)
     if current_user
-      render json: {id: current_user.id, username: current_user.username, token: issue_token(the_current_user)}
+      render json: {id: current_user.id, full_name: current_user.full_name}
+      # , token: issue_token(the_current_user) NOT YET
     else
-      render({json: {error: 'Token is not valid'}, status: 401})
+      render({json: {error: 'Invalid Token'}, status: 401})
     end
   end
 

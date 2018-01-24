@@ -13,13 +13,13 @@ class MyPage extends React.Component {
           this.props.users.length === 0 ? "Loading..." :
           <div>
             <h1>{this.props.currentUser.full_name}</h1>
-              <label>My Chinese Zodiac Info:</label>
+              <h2>Chinese Zodiac</h2>
               <EasternContainer
                 renderPartner={this.props.renderPartner}
                 users={this.props.users}
                 currentUser={this.props.currentUser}
               />
-              <label>My Western Astrology Info:</label>
+            <h2>Western Astrology</h2>
               <WesternContainer currentUser={this.props.currentUser} />
           </div>
         }

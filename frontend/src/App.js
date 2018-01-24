@@ -25,6 +25,8 @@ class App extends Component {
   }
   componentDidMount()
   {
+    // const token = localStorage.getItem('token')
+    // token ? Adapter.getCurrentUserAuth().then(res => console.log) : null
     Adapter.getUsers()
     .then(users => this.setState({
       users: users
@@ -45,6 +47,7 @@ class App extends Component {
 
   loginInput = (user) =>
   {
+    localStorage.setItem('token', user.id)
     this.setState({
       currentUser: user
     }, ()=>this.props.history.push("user"))
@@ -54,11 +57,18 @@ class App extends Component {
   {
     this.setState({birthdate: new Date(e.target.value)});
   }
+
+  handleLogout = () => {
+    localStorage.removeItem('token')
+    this.setState({
+      currentUser: null
+    }, ()=>this.props.history.push("login"))
+  }
   render() {
     return (
       <div>
         <div>
-          <NavBar /><br/>
+          <NavBar currentUser={this.state.currentUser} handleLogout={this.handleLogout}/><br/>
         </div>
 
           <div>

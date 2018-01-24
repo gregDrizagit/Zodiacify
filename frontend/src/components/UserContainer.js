@@ -103,9 +103,9 @@ calculateChineseSign = () =>
       <div>
         {this.state.users && this.state.currentUser && this.state.currentUser.eastern && this.state.currentUser.western ?
           <div className='ui relaxed two column grid'>
-            <div className="column">
+            <div className="column"><center>
               <MyPage renderPartner={this.renderPartner} users={this.state.users} currentUser={this.state.currentUser} />
-            </div>
+            </center></div>
 
           {this.state.partnerProf ?
             <div className="column">

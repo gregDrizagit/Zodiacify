@@ -1,11 +1,14 @@
 body {
   padding-top: 80px;
-  /*font-size: 20px;*/
+  font-family: 'Dosis', sans-serif;
+  font-size: 20px;
 }
 
-.header.item {
-  font-family: 'Monoton', cursive;
-}
+/*.header.item {
+  font-family: 'Dosis', sans-serif;
+  font-size: 25px;
+  font-weight: bold;
+}*/
 .signTile {
   display: inline;
   background-repeat: no-repeat;
@@ -22,4 +25,36 @@ body {
   width: 250px;
   height: 250px;
   background-size: cover;
+}
+
+.hands {
+  width: 100%;
+  height: 100%;
+}
+
+a.user:hover {
+  color:blue;
+}
+
+p.title {
+  color: #FFDD1B;
+  font-family: Pacifico;
+  font-weight: lighter;
+  font-size: 30px;
+
+}
+
+p.title:hover {
+  -webkit-animation: neon3 1.5s ease-in-out infinite alternate;
+  -moz-animation: neon3 1.5s ease-in-out infinite alternate;
+  animation: neon3 1.5s ease-in-out infinite alternate;
+}
+
+@-webkit-keyframes neon3 {
+  from {
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #FFDD1B, 0 0 70px #FFDD1B, 0 0 80px #FFDD1B, 0 0 100px #FFDD1B, 0 0 150px #FFDD1B;
+  }
+  to {
+    text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #fff, 0 0 20px #FFDD1B, 0 0 35px #FFDD1B, 0 0 40px #FFDD1B, 0 0 50px #FFDD1B, 0 0 75px #FFDD1B;
+  }
 }
