@@ -19,7 +19,7 @@ class UserContainer extends React.Component {
     console.log("in user mount", this.props.currentUser);
     if (!this.props.currentUser) {
     } else {
-      debugger
+      // debugger
       this.updateUserSigns()
     }
   }
