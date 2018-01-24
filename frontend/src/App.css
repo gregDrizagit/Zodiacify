@@ -21,6 +21,13 @@ body {
   height: 250px;
   background-size: cover;
 }
+/*Login*/
+
+.ui.middle.aligned.center.aligned {
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
 
 /*Navbar*/
 
