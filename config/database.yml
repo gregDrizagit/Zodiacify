@@ -14,16 +14,16 @@
 # Configure Using Gemfile
 # gem 'pg'
 #
-default: &default
-  adapter: sqlite3
-  encoding: unicode
+# default: &default
+#   adapter: postgresql
+#   encoding: unicode
   # For details on connection pooling, see Rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-
-development:
-  <<: *default
-  database: zodiacify_development
+#   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+#
+# development:
+#   <<: *default
+#   database: my_zodiacify_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
@@ -41,7 +41,7 @@ development:
 
   # The TCP port the server listens on. Defaults to 5432.
   # If your server runs on a different port number, change accordingly.
-  port: 8001
+  # port: 8001
 
   # Schema search path. The server defaults to $user,public
   #schema_search_path: myapp,sharedapp,public
@@ -55,9 +55,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: zodiacify_test
+# test:
+#   <<: *default
+#   database: my_zodiacify_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -78,9 +78,25 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
+# production:
+#   <<: *default
+#   database: my_zodiacify_production
+#   username: zodiacify
+#   password: <%= ENV['ZODIACIFY_DATABASE_PASSWORD'] %>
+#   port: 8001
+
+development:
+  adapter: postgresql
+  database: my_database_development
+  pool: 5
+  timeout: 5000
+test:
+  adapter: postgresql
+  database: my_database_test
+  pool: 5
+  timeout: 5000
 production:
-  <<: *default
-  database: zodiacify_production
-  username: zodiacify
-  password: <%= ENV['ZODIACIFY_DATABASE_PASSWORD'] %>
-  port: 8001
+  adapter: postgresql
+  database: my_database_production
+  pool: 5
+  timeout: 5000
