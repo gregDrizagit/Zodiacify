@@ -1,30 +1,31 @@
 const token = localStorage.getItem('token')
+const url = 'http://localhost:3003'
 
 class Adapter
 {
 
   static getUsers()
   {
-    return fetch('http://localhost:3001/users').then(resp => resp.json())
+    return fetch(`${url}/users`).then(resp => resp.json())
   }
 
   static getAllEastSigns() {
-    return fetch('http://localhost:3001/easterns')
+    return fetch(`${url}/easterns`)
     .then(res => res.json())
   }
 
   static getAllWestSigns() {
-    return fetch('http://localhost:3001/westerns')
+    return fetch(`${url}/westerns`)
     .then(res => res.json())
   }
 
   static getEasternPartners(easternId)
   {
-    return fetch(`http://localhost:3001/easterns/${easternId}`).then(resp => resp.json())
+    return fetch(`${url}/easterns/${easternId}`).then(resp => resp.json())
   }
   static postUser(name, birthdate)
   {
-    return fetch('http://localhost:3001/users',{
+    return fetch(`${url}/users`,{
       method: 'POST',
       headers:{
         "Content-Type": "application/json",
@@ -37,7 +38,7 @@ class Adapter
 
   static patchSignsToUser(user, easternId, westernId)
   {
-    return fetch(`http://localhost:3001/users/${user.id}`,{
+    return fetch(`${url}/users/${user.id}`,{
       method: 'PATCH',
       headers:{
         "Content-Type": "application/json",
@@ -49,7 +50,7 @@ class Adapter
   }
 
   static postToAuth(full_name, password) {
-    return fetch('http://localhost:3001/auth/', {
+    return fetch(`${url}/auth/`, {
       method: 'POST',
       headers:{
         "Content-Type": "application/json",
@@ -60,7 +61,7 @@ class Adapter
   }
 
   static getCurrentUserAuth() {
-    return fetch('http://localhost:3001/current_user/', {
+    return fetch(`${url}/current_user/`, {
       headers: {
         "Content-Type": "application/json",
         "Accept": "application/json",
