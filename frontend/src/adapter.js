@@ -1,5 +1,5 @@
 const token = localStorage.getItem('token')
-const url = 'http://localhost:3003'
+const url = 'https://zodiacify.herokuapp.com'
 
 class Adapter
 {
